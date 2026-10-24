@@ -1,0 +1,16 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "this is a movie booking websitea",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm app.js"
+  },
+  "author": "Lokesh dashore",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
+    "mongoose": "^9.11.1"
+  }
+}
