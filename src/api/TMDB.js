@@ -24,5 +24,16 @@ export const getWatchlistMovies = async () => {
   } 
 }; 
 
+export const getMovieId= async (moviename) => {
+  try{
+    const response=await tmdbApi.get(`/search/movie?query=${moviename}`);
+    console.log(response);
+    return response.data.results[0];
+  }catch(err){
+    console.log(err);
+    return [];
+  }
+}
+
 //Corrected the image base URL asset path
 export const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w400";

@@ -86,7 +86,7 @@ export default function ThreaterForm(){
 
             <form onSubmit={handleSubmit} id="form" className="theatre-form">
                 
-                {/* SECTION 1: Basic Information */}
+                
                 <div className="form-section-block">
                     <h3>Basic Details</h3>
                     <div className="form-grid-3">
@@ -105,7 +105,7 @@ export default function ThreaterForm(){
                     </div>
                 </div>
 
-                {/* SECTION 2: Seating Layout Configuration */}
+                
                 <div className="form-section-block">
                     <h3>Seating Layout & Tier Prices</h3>
                     
@@ -131,7 +131,7 @@ export default function ThreaterForm(){
                     </div>
                 </div>
 
-                {/* Form Buttons */}
+                
                 <div className="form-actions">
                     <button type="submit" className="btn-submit" disabled={loading}>
                         {loading ? "Saving Layout..." : "Save Theatre Layout"}

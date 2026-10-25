@@ -4,7 +4,7 @@ function Hero(){
     return(
         <div className="col Hero">
             <div className="row-4">
-                <h1>IMOvie make booking esay</h1>
+                <h1 className="logo">IMovies</h1><h4>make booking esay</h4>
                 <p>Welcome to IMovie it make a ticket booking on one click no need to wait in a long line</p>
             </div>
                 <div className="row-2 hero-image">

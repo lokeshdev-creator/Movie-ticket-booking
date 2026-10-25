@@ -1,21 +1,21 @@
 import React,{useState,useEffect} from 'react'
 import axios from 'axios'
+import { getMovieId } from '../../api/TMDB';
 
 export default function ShowForm(){
     const [theatres,setTheatres] = useState([]);
     const [formData,setFormData] = useState({
         movieName:"",
-        threaterId:"",
-        date:"",
-        time:"",
+        showdate:"",
+        showtime:"",
         threaterName:"",
-        theaterId:""
+        threaterId:""
     })
      const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState({ type: "", text: "" });
 
     useEffect(()=>{
-        //fetch the treat of a particuar admin;
+        //fetch the threater of a particular admin;
     },[]);
 
     const handleChange=(e)=>{
@@ -27,17 +27,40 @@ export default function ShowForm(){
     };
 
     const handleSubmit=async(e)=>{
-        e.preventDeafult();
+        e.preventDefault();
         setLoading(true);
         setMessage({type:"",text:""});
+        try{
+           const movieid=await getMovieId(formData.movieName);
+        console.log("movieid",movieid);
         const payload={
-            movieName:formData.movieName,
-            date:formData.date,
-            time:formData.time,
+            MovieId:movieid.id,
+            showdate:formData.showdate,
+            showtime:formData.showtime,
             threaterName:formData.threaterName,
-            threaterId:formData.threaterId
+            threaterId:formData.threaterId || "PVR_NR_01"
         };
-
+        const res=await axios.post('http://localhost:4000/addshow',payload);
+        console.log(res.data);
+        if(res.status=200 || res.status==201){
+            setMessage({type:"success",text:"Show created successfully!"});  
+        } 
+        }catch(err){
+        setMessage({type:"failed",text:err.message});
+        }finally{
+            setFormData({
+                movieName:"",
+                showdate:"",
+                showtime:"",
+                threaterName:"",
+                threaterId:""
+            })
+            setLoading(false); 
+        }
+        setTimeout(() => {
+            setMessage({type:"",text:""});
+        }, 1000);
+        
 
 
     }
@@ -73,18 +96,18 @@ export default function ShowForm(){
                             <label>Threater Name</label>
                             <input 
                                 type="text" 
-                                name="Threat" 
+                                name="threaterName" 
                                 value={formData.threaterName} 
                                 onChange={handleChange} 
                                 placeholder="e.g. Velocity cinema" 
                                 required 
                             />
                         </div>
-                        <div className="input-group">
+                        {/* <div className="input-group">
                             <label>Select Theatre ID</label>
                             <select 
                                 name="theaterId" 
-                                value={formData.theaterId} 
+                                value={formData.threaterId} 
                                 onChange={handleChange} 
                                 required
                             >
@@ -95,26 +118,26 @@ export default function ShowForm(){
                                     </option>
                                 ))}
                             </select>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="form-grid-2" style={{ marginTop: "20px" }}>
                         <div className="input-group">
-                            <label>Show Date</label>
+                            <label>Show date</label>
                             <input 
                                 type="date" 
-                                name="date" 
-                                value={formData.date} 
+                                name="showdate" 
+                                value={formData.showdate} 
                                 onChange={handleChange} 
                                 required 
                             />
                         </div>
                         <div className="input-group">
-                            <label>Show Time</label>
+                            <label>Show time</label>
                             <input 
                                 type="text" 
-                                name="time" 
-                                value={formData.time} 
+                                name="showtime" 
+                                value={formData.showtime} 
                                 onChange={handleChange} 
                                 placeholder="e.g. 03:30 PM" 
                                 required 

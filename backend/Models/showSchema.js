@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 
 const showScehma= new mongoose.Schema({
-    tmdbMovieId:{
+    MovieId:{
         type:String,
-        require:true,
-        index:true
+        required:true,
     },
     showdate:{
         type:String,
@@ -14,14 +13,13 @@ const showScehma= new mongoose.Schema({
         type:String,
         required:true
     },
-    threatreName:{
+    threaterName:{
         type:String,
-        require:true,
+        required:true,
     },
-    threatreid:{
+    threaterId:{
         type:String,
-        require:true,
-        unique:true
+        required:true,
     },
 },{timestamps:true});
 

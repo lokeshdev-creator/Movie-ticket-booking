@@ -24,18 +24,19 @@ const Show = require('./Models/showSchema');
 app.use(cors());
 app.use(express.json());
 
-app.post('/dashboard/addthreater',async(req,res)=>{
+//route to create a new threater
+app.post('/addthreater',async(req,res)=>{
     try{
        const data=req.body;
     const response=await Threatre.insertOne(data);
-    return res.status(200).json({success:true,message:"show add successfully"}); 
+    return res.status(200).json({success:true,message:"threater add successfully"}); 
     }catch(err){
         console.log(err);
         if(err.name=='validationError'){
             const msg=Object.values(err.errors).map(err=>err.message);
             return res.status(400).json({
                 success:false,
-                message:`Validation Error:${message.join(',')}`
+                message:`Validation Error:${msg.join(',')}`
             });
         }
     }
@@ -46,17 +47,34 @@ app.post('/dashboard/addthreater',async(req,res)=>{
     
 });
 
-app.post('/:id/dashboard/addshow',async(req,res)=>{
+// route to add show
+app.post('/addshow',async(req,res)=>{
     try{
-        console.log(req);
     const data=req.body;
-    // const response= await Show.insertOne(data);
-    // console.log(response);
-    res.send({status:200});
+    console.log(data);
+    const response = await Show.insertOne(data);
+     console.log(response);
+    return res.status(200).json({success:true,message:"show add successfully"});
     }catch(err){
         console.log(err);
+        if(err.name=='validationError'){
+            const msg=Object.values(err.errors).map(err=>err.message);
+            return res.status(400).json({
+                success:false,
+                message:`Validation Error:${msg.join(',')}`
+            });
+        }
     }
+
+     res.status(500).json({ 
+            success: false, 
+            message: "An internal server error occurred." 
+        });
     
+})
+
+app.get('/shows/:movieid',(req,res)=>{
+
 })
 
 app.listen(port,()=>{ 

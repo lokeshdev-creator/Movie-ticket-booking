@@ -28,13 +28,12 @@ useEffect(()=>{
             {
                 movies?.map((movie)=>{
                 return(
-
                         <section className="card" style={{maxWidth: "320px"}} key={movie.id}>
                         <img src={`${IMAGE_BASE_URL}${movie.poster_path}`} className="card-img-top" alt={movie.original_title}/>
                         <div className="card-body">
                             <h4 className="card-title">{movie.original_title}</h4>
                             <p>{movie.release_date}</p>
-                            <a href="#" className="btn-solid btn " style={{backgroundColor:"green",color:"whitesmoke",}}>Book show</a>
+                            <a href={`/id/book/${movie.id}`} className="btn-solid btn " style={{backgroundColor:"green",color:"whitesmoke",}}>Book show</a>
                         </div>
                     </section>
                     );

@@ -11,6 +11,7 @@ import ShowForm from './dashboard/form-component/showform.jsx'
 import Booking from './dashboard/form-component/Booking.jsx'
 import Login from './Login.jsx'
 import SignUp from './SignUp.jsx'
+import Shows from './Shows.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -25,6 +26,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='Addshows' element={<ShowForm/>}/>
             <Route path='bookings' element={<Booking/>}/>
         </Route>
+        <Route path='/:id/book/:movieid' element={<Shows/>}/>
       </Route>
       <Route path='/Login'element={<Login/>} />
       <Route path='/singup'element={<SignUp/>} />
